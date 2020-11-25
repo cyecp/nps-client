@@ -12,6 +12,6 @@ RUN set -x && \
 
 FROM arm64v8/alpine:latest AS release
 
-COPY --from=builder /qemu/qemu-arm-static /usr/bin
+COPY qemu-aarch64-static /usr/bin
 
 CMD ["sh", "-c", "/npc/npc -server=$SERVERIP -vkey=$VKEY"]
