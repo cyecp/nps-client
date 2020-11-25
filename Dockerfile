@@ -1,4 +1,4 @@
-FROM --platform=linux/arm64 alpine:latest
+FROM alpine:latest
 
 ENV NPC_VERSION=0.26.8
 ENV SERVERIP=127.0.0.1:1024
