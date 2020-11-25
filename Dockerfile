@@ -10,5 +10,8 @@ RUN set -x && \
     mv linux_arm64_client* /npc  && \
     cd /npc &&  tar xzf linux_arm64_client.tar.gz &&  rm -rf *.tar.gz &&  rm -rf nps/conf/
 
+FROM arm64v8/alpine:latest AS release
+
+COPY --from=builder /qemu/qemu-arm-static /usr/bin
 
 CMD ["sh", "-c", "/npc/npc -server=$SERVERIP -vkey=$VKEY"]
