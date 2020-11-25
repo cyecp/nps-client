@@ -1,4 +1,4 @@
-FROM alpine:latest as qemu
+FROM arm64v8/alpine:latest as qemu
 
 ARG QEMU_VERSION=4.2.0-6
 ARG QEMU_ARCHS="aarch64"
@@ -8,8 +8,6 @@ RUN apk --update add curl
 # Enable non-native runs on amd64 architecture hosts
 RUN for i in ${QEMU_ARCHS}; do curl -L https://github.com/multiarch/qemu-user-static/releases/download/v${QEMU_VERSION}/qemu-${i}-static.tar.gz | tar zxvf - -C /usr/bin; done
 RUN chmod +x /usr/bin/qemu-*
-
-FROM arm64v8/alpine:latest AS release
 
 COPY --from=qemu /usr/bin/qemu-*-static /usr/bin/
 
